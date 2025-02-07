@@ -12,9 +12,15 @@
   },
   "license": "ISC",
   "author": "juan fernando uribe medina",
-  "type": "(module)",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
   }
 }
