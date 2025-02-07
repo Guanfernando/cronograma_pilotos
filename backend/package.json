@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Planeacion de vuelos",
+  "homepage": "https://github.com/Guanfernando/cronograma_pilotos#readme",
+  "bugs": {
+    "url": "https://github.com/Guanfernando/cronograma_pilotos/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guanfernando/cronograma_pilotos.git"
+  },
+  "license": "ISC",
+  "author": "juan fernando uribe medina",
+  "type": "(module)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
