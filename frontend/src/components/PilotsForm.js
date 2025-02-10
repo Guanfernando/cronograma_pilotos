@@ -1,5 +1,6 @@
 import {Col, Row, Image, Container, Form, Button} from 'react-bootstrap';
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const PilotsForm = ({onSubmit}) => {
@@ -10,9 +11,13 @@ const PilotsForm = ({onSubmit}) => {
     const [message, setMessage] = useState("");
 
 
+    const navigate = useNavigate();
+
     const handleSubmit = async  (event) => {
         event.preventDefault();
         const data = {id, firstName, secondName};
+
+    
          
 
             try {
@@ -43,7 +48,7 @@ const PilotsForm = ({onSubmit}) => {
                 <h1>Registro de Pilotos</h1>
             </Col>
             <Col sm={2}>  
-                <Image width={190} src="/flying.png"/>
+                <Image width={190} src="/flying.png"  onClick={() => navigate("/")} />
             </Col>
         </Row> 
         <Row>
