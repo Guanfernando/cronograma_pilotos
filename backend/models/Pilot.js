@@ -13,9 +13,27 @@ const Pilot = sequelize.define('Pilot', {
         allowNull: false
     },
     
-    secondName: DataTypes. STRING,
+    secondName:{
+     type: DataTypes.STRING,
+    },
 
-}, {
+    firstLastName:{
+        type: DataTypes.STRING,
+        allowNull:false
+    },
+
+    secondLastName:{
+        type: DataTypes.STRING,
+       
+    },
+
+    birthday:{
+        type: DataTypes.STRING,
+    }
+
+},{
+
+
     timestamps: false
 
 });

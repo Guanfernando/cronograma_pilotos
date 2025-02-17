@@ -8,6 +8,9 @@ const PilotsForm = ({onSubmit}) => {
     const [id, setId] = useState(0);
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
+    const [firstLastName, setFirstLastName] = useState("");
+    const [secondLastName, setSecondLastName] = useState("");
+    const [birthday, setBirthday]=useState("");
     const [message, setMessage] = useState("");
 
 
@@ -15,7 +18,7 @@ const PilotsForm = ({onSubmit}) => {
 
     const handleSubmit = async  (event) => {
         event.preventDefault();
-        const data = {id, firstName, secondName};
+        const data = {id, firstName, secondName, firstLastName, secondLastName, birthday };
 
     
          
@@ -28,11 +31,11 @@ const PilotsForm = ({onSubmit}) => {
             });
 
             if (response.ok) {
-                setMessage('Piloto agregado con exito!');
+                  setMessage('Piloto agregado con exito!');
                 setId(0);
                 setFirstName("");
             } else {
-                setMessage('Error al agregar piloto');
+                alert('Error al agregar piloto, verifique todos los campos o si el registro ya existe!');
             }
             } catch (error) {
                 console.error('Error de conexion', error);
@@ -84,6 +87,33 @@ const PilotsForm = ({onSubmit}) => {
                         placeholder="Segundo Nombre"
                         value={secondName}
                         onChange={(e) => setSecondName(e.target.value)} />
+                    </Col>
+
+                    <Col xs={2} md={2}>
+                        <Form.Label>Primer Apellido*</Form.Label>
+                        <Form.Control 
+                        type="text" 
+                        placeholder="Primer Apellido" 
+                        required value={firstLastName} 
+                        onChange={(e) => setFirstLastName(e.target.value)} />
+                    </Col>
+
+                    <Col xs={2} md={2}>
+                        <Form.Label>Segundo Apellido*</Form.Label>
+                        <Form.Control 
+                        type="text" 
+                        placeholder="Segundo Apellido" 
+                        required value={secondLastName} 
+                        onChange={(e) => setSecondLastName(e.target.value)} />
+                    </Col>
+
+                    <Col xs={2} md={2}>
+                        <Form.Label>Fecha de Nacimiento*</Form.Label>
+                        <Form.Control 
+                        type="date" 
+                        placeholder="Fecha de Nacimiento" 
+                        required value={birthday} 
+                        onChange={(e) => setBirthday(e.target.value)} />
                     </Col>
 
                 </Row>
