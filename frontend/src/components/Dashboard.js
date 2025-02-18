@@ -11,6 +11,7 @@ const Dashboard = () => {
             <div className="dashboard__header">
                 <h1>Dashboard</h1>
                 <Image src= '/icono_piloto.png' width={200} onClick={() => navigate("/api/pilots/")} />
+                <Image src= '/icono_listado.png' width={200} onClick={() => navigate("/api/pilotslist/")} />
             </div>
             <div className="dashboard__content">
                 <h2>Content</h2>

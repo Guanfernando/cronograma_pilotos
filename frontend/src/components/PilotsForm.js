@@ -11,6 +11,9 @@ const PilotsForm = ({onSubmit}) => {
     const [firstLastName, setFirstLastName] = useState("");
     const [secondLastName, setSecondLastName] = useState("");
     const [birthday, setBirthday]=useState("");
+    const [email, setEmail] = useState("");
+    const [nationality, setNationality] = useState("");
+
     const [message, setMessage] = useState("");
 
 
@@ -18,7 +21,7 @@ const PilotsForm = ({onSubmit}) => {
 
     const handleSubmit = async  (event) => {
         event.preventDefault();
-        const data = {id, firstName, secondName, firstLastName, secondLastName, birthday };
+        const data = {id, firstName, secondName, firstLastName, secondLastName, birthday, email };
 
     
          
@@ -32,10 +35,10 @@ const PilotsForm = ({onSubmit}) => {
 
             if (response.ok) {
                   setMessage('Piloto agregado con exito!');
-                setId(0);
+                setId();
                 setFirstName("");
             } else {
-                alert('Error al agregar piloto, verifique todos los campos o si el registro ya existe!');
+                setMessage('Error al agregar piloto, verifique todos los campos o si el registro ya existe!');
             }
             } catch (error) {
                 console.error('Error de conexion', error);
@@ -46,11 +49,11 @@ const PilotsForm = ({onSubmit}) => {
 
     return (
         <Container>
-        <Row>
-            <Col className="text mt-5" sm={10}>
+        <Row className="xs-1">
+            <Col className="text mt-3" sm={10}>
                 <h1>Registro de Pilotos</h1>
             </Col>
-            <Col sm={2}>  
+            <Col xs={1}>  
                 <Image width={190} src="/flying.png"  onClick={() => navigate("/")} />
             </Col>
         </Row> 
@@ -60,8 +63,8 @@ const PilotsForm = ({onSubmit}) => {
             </Col>
         </Row>
             <Form onSubmit={handleSubmit}>
-                <Row>
-
+                
+                <Row className="mb-3">
                     <Col xs={2} md={2}>
                         <Form.Label>Número Documento*</Form.Label>
                         <Form.Control 
@@ -115,7 +118,17 @@ const PilotsForm = ({onSubmit}) => {
                         required value={birthday} 
                         onChange={(e) => setBirthday(e.target.value)} />
                     </Col>
+                </Row>
 
+                <Row className="mb-3">
+                <Col xs={2} md={4}>
+                        <Form.Label>Correo Electronico*</Form.Label>
+                        <Form.Control 
+                        type="email" 
+                        placeholder="Correo Electronico"
+                        required value={email} 
+                        onChange={(e) => setEmail(e.target.value)} />
+                    </Col>
                 </Row>
 
                     <Button type='submit'>Guardar</Button>

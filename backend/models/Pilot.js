@@ -29,6 +29,11 @@ const Pilot = sequelize.define('Pilot', {
 
     birthday:{
         type: DataTypes.STRING,
+    },
+
+    email:{
+        type: DataTypes.STRING,
+        
     }
 
 },{
