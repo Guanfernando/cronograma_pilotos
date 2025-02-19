@@ -40,8 +40,8 @@ const startServer = async () => {
 // Endpoint para recibir los datos del formulario (frontend-PilotsForm)
 app.post('/api/pilots', async (req, res) => {
     try {
-        const { id, firstName, secondName, firstLastName, secondLastName, birthday, email } = req.body;
-        const newPilot = await Pilot.create({ id, firstName, secondName, firstLastName, secondLastName, birthday, email });
+        const { id, firstName, secondName, firstLastName, secondLastName, birthday, email, telephoneNumber, city, address } = req.body;
+        const newPilot = await Pilot.create({ id, firstName, secondName, firstLastName, secondLastName, birthday, email, telephoneNumber, city, address});
         res.status(201).json(newPilot);
         console.log('✅ Registro creado con éxito:', newPilot);
     } catch (error) {  // Capturar el error correctamente
@@ -61,7 +61,7 @@ app.get('/api/pilotslist', async (req, res) => {
         res.json(pilots);
     } catch (error) {
         console.error("❌ Error obteniendo los datos:", error);
-        res.status(500).json({ error: 'Error al obtener los registros' });
+        res.status(500).json({ error: 'Error al obtener los registros' });  
     }
 });
 

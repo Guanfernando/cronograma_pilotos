@@ -46,27 +46,33 @@ const PilotsList = () => {
     }
 
     return (
-        <div className="container mt-4">
+        <div className="px-5">
             <h2 className="mb-4">Información de Pilotos</h2>
             {pilots.length > 0 ? (
-                <Table striped bordered hover responsive>
+                <Table striped bordered hover responsive size="sm">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Email</th>
                             <th>Fecha de Nacimiento</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Ciudad</th>
+                            <th>Direccion</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         {pilots.map((pilot) => (
                             <tr key={pilot.id}>
                                 <td>{pilot.id}</td>
-                                <td>{`${pilot.firstName} ${pilot.secondName || ''}`}</td>
-                                <td>{`${pilot.firstLastName} ${pilot.secondLastName || ''}`}</td>
-                                <td>{pilot.email}</td>
+                                <td>{`${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName}`}</td>
                                 <td>{new Date(pilot.birthday).toLocaleDateString()}</td>
+                                <td>{pilot.email}</td>
+                                <td>{pilot.telephoneNumber}</td>
+                                <td>{pilot.city}</td>
+                                <td>{pilot.address}</td>
+                                
                             </tr>
                         ))}
                     </tbody>

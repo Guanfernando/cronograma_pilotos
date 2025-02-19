@@ -12,7 +12,10 @@ const PilotsForm = ({onSubmit}) => {
     const [secondLastName, setSecondLastName] = useState("");
     const [birthday, setBirthday]=useState("");
     const [email, setEmail] = useState("");
-    const [nationality, setNationality] = useState("");
+    const [telephoneNumber, setTelephoneNumber]= useState("");
+    const [city, setCity]= useState("");
+    const [address, setAddress] = useState("");
+    
 
     const [message, setMessage] = useState("");
 
@@ -21,7 +24,7 @@ const PilotsForm = ({onSubmit}) => {
 
     const handleSubmit = async  (event) => {
         event.preventDefault();
-        const data = {id, firstName, secondName, firstLastName, secondLastName, birthday, email };
+        const data = {id, firstName, secondName, firstLastName, secondLastName, birthday, email, telephoneNumber, city, address };
 
     
          
@@ -48,13 +51,13 @@ const PilotsForm = ({onSubmit}) => {
 
 
     return (
-        <Container>
-        <Row className="xs-1">
+        <Container className='px-0'>
+        <Row style={{height:"110px"}}>
             <Col className="text mt-3" sm={10}>
                 <h1>Registro de Pilotos</h1>
             </Col>
             <Col xs={1}>  
-                <Image width={190} src="/flying.png"  onClick={() => navigate("/")} />
+                <Image width={140} src="/flying.png"  onClick={() => navigate("/")} />
             </Col>
         </Row> 
         <Row>
@@ -121,6 +124,7 @@ const PilotsForm = ({onSubmit}) => {
                 </Row>
 
                 <Row className="mb-3">
+
                 <Col xs={2} md={4}>
                         <Form.Label>Correo Electronico*</Form.Label>
                         <Form.Control 
@@ -129,6 +133,35 @@ const PilotsForm = ({onSubmit}) => {
                         required value={email} 
                         onChange={(e) => setEmail(e.target.value)} />
                     </Col>
+
+
+                    <Col xs={2} md={2}>
+                        <Form.Label>Telefono*</Form.Label>
+                        <Form.Control 
+                        type="number" 
+                        placeholder="Telefono" 
+                        required value={telephoneNumber} 
+                        onChange={(e) => setTelephoneNumber(e.target.value)} />
+                    </Col>
+
+                    <Col xs={2} md={2}>
+                        <Form.Label>Ciudad*</Form.Label>
+                        <Form.Control 
+                        type="text" 
+                        placeholder="Ciudad" 
+                        required value={city} 
+                        onChange={(e) => setCity(e.target.value)} />
+                    </Col>
+
+                    <Col xs={2} md={4}>
+                        <Form.Label>Dirección*</Form.Label>
+                        <Form.Control 
+                        type="text" 
+                        placeholder="Dirección Domicilio"
+                        required value={address} 
+                        onChange={(e) => setAddress(e.target.value)} />
+                    </Col>
+
                 </Row>
 
                     <Button type='submit'>Guardar</Button>

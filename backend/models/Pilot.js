@@ -34,6 +34,17 @@ const Pilot = sequelize.define('Pilot', {
     email:{
         type: DataTypes.STRING,
         
+    },
+    telephoneNumber:{
+        type: DataTypes.INTEGER,
+    },
+
+    city:{
+        type: DataTypes.STRING,
+    },
+
+    address:{
+        type: DataTypes.STRING,
     }
 
 },{
