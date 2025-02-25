@@ -30,7 +30,7 @@ const startServer = async () => {
 
         // Iniciar el servidor después de sincronizar
         app.listen(PORT, () => {
-            console.log(`✅ Servidor conectado en el puerto http://localhost:${PORT}`);
+            console.log(`✅ Servidor conectado en el puerto http://192.168.10.19:${PORT}`);
         });
     } catch (error) {
         console.error("❌ Error al iniciar el servidor:", error);
@@ -40,9 +40,10 @@ const startServer = async () => {
 // Endpoint para recibir los datos del formulario (frontend-PilotsForm)
 app.post('/api/pilots', async (req, res) => {
     try {
-        const { id, firstName, secondName, firstLastName, secondLastName, birthday, email, telephoneNumber, city, address } = req.body;
-        const newPilot = await Pilot.create({ id, firstName, secondName, firstLastName, secondLastName, birthday, email, telephoneNumber, city, address});
+        const { idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday, rh, weight, eps, emergencyContact, emergencyNumber } = req.body;
+        const newPilot = await Pilot.create({ idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday,  rh, weight, eps , emergencyContact, emergencyNumber });
         res.status(201).json(newPilot);
+        console.log(req.body);
         console.log('✅ Registro creado con éxito:', newPilot);
     } catch (error) {  // Capturar el error correctamente
         console.error("❌ Error al crear el registro:", error);
@@ -57,6 +58,21 @@ app.get('/api/pilotslist', async (req, res) => {
         const pilots = await Pilot.findAll({
             order: [['id', 'ASC']]
         });
+        console.log('✅ Pilotos encontrados:', pilots.length); // Log para debugging
+        res.json(pilots);
+    } catch (error) {
+        console.error("❌ Error obteniendo los datos:", error);
+        res.status(500).json({ error: 'Error al obtener los registros' });  
+    }
+});
+
+
+//ruta GET para obtener pilotos en la mision
+app.get('/api/mision', async (req, res) => {
+    try {
+        const pilots = await Pilot.findAll({
+            order: [['firstName', 'ASC']],
+            });        
         console.log('✅ Pilotos encontrados:', pilots.length); // Log para debugging
         res.json(pilots);
     } catch (error) {
