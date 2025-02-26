@@ -187,18 +187,14 @@ const PilotsForm = ({ onSubmit }) => {
                         <Form.Label>Numero de Licencia*</Form.Label>
                         <Form.Control type="number" name="licenseNumber" placeholder="Numero Licencia" required />
                     </Col>
+                    <Col xs={2} md={2}>
+                        <Form.Label>Certificado Médico*</Form.Label>
+                        <Form.Control type="date" name="medicalCertificate" required />
+                        <Form.Label>Fecha de Vencimiento*</Form.Label>
+                        <Form.Control type="date" name="certificateExpiration" required />
+                    </Col>
 
                     {/*<Col xs={2} md={2}>
-                        <Form.Label>Primer Nombre*</Form.Label>
-                        <Form.Control type="text" name="firstName" placeholder="Primer Nombre" required />
-                    </Col>
-
-                    <Col xs={2} md={2}>
-                        <Form.Label>Segundo Nombre</Form.Label>
-                        <Form.Control type="text" name="secondName" placeholder="Segundo Nombre" />
-                    </Col>
-
-                    <Col xs={2} md={2}>
                         <Form.Label>Primer Apellido*</Form.Label>
                         <Form.Control type="text" name="firstLastName" placeholder="Primer Apellido" required />
                     </Col>

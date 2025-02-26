@@ -81,7 +81,28 @@ const Pilot = sequelize.define('Pilot', {
     emergencyNumber:{
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+
+    licenseType:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    licenseNumber:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+
+    medicalCertificate:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    certificateExpiration:{
+        type: DataTypes.STRING,
+        allowNull: false
     }
+
 
 
 },{

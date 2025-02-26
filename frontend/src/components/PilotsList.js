@@ -112,6 +112,10 @@ const PilotsList = () => {
                                 <th>EPS</th>
                                 <th>Contacto de Emergencia</th>
                                 <th>Telefono de Emergencia</th>
+                                <th>Typo Licencia</th>
+                                <th>Numero Licencia</th>
+                                <th>Fecha Certificado Médico</th>
+                                <th>Vencimiento Certificado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,6 +134,10 @@ const PilotsList = () => {
                                     <td>{pilot.eps}</td>
                                     <td>{pilot.emergencyContact}</td>
                                     <td>{pilot.emergencyNumber}</td>
+                                    <td>{pilot.licenseType}</td>
+                                    <td>{pilot.licenseNumber}</td>
+                                    <td>{pilot.medicalCertificate}</td>
+                                    <td>{pilot.certificateExpiration}</td>
                                 </tr>
                             ))}
                         </tbody>

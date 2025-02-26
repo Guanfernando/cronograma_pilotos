@@ -15,6 +15,7 @@ return (
         
     
         <Form onSubmit={handleSearch}>
+        <Row>
         <Col className="text mt-2" sm={3}>
             <Form.Group>
                 <Form.Control
@@ -25,11 +26,15 @@ return (
                 />
             </Form.Group>
             </Col>
+            
             <Col className="text mt-2" sm={4}>
+            
             <Button variant="primary" type="submit">
                 Buscar
             </Button>
+        
             </Col>
+            </Row>
     </Form>
     
     </Row>

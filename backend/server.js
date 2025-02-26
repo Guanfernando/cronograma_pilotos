@@ -40,8 +40,8 @@ const startServer = async () => {
 // Endpoint para recibir los datos del formulario (frontend-PilotsForm)
 app.post('/api/pilots', async (req, res) => {
     try {
-        const { idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday, rh, weight, eps, emergencyContact, emergencyNumber } = req.body;
-        const newPilot = await Pilot.create({ idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday,  rh, weight, eps , emergencyContact, emergencyNumber });
+        const { idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday, rh, weight, eps, emergencyContact, emergencyNumber, licenseType, licenseNumber, medicalCertificate, certificateExpiration } = req.body;
+        const newPilot = await Pilot.create({ idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday,  rh, weight, eps , emergencyContact, emergencyNumber, licenseType, licenseNumber, medicalCertificate, certificateExpiration });
         res.status(201).json(newPilot);
         console.log(req.body);
         console.log('✅ Registro creado con éxito:', newPilot);
