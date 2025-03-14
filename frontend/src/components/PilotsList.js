@@ -1,7 +1,6 @@
 //src/components/PilotsList.js
 import React, { useEffect, useState } from "react";
 import { Table, Alert, Button, Col, Image, Row } from "react-bootstrap";
-import axios from "axios";
 import Loader from "./Loader";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
@@ -45,18 +44,21 @@ const PilotsList = () => {
     // Función para obtener pilotos
     const fetchPilots = async () => {
         try {
-            const response = await axios.get('http://192.168.10.19:4000/api/pilotslist');
-            const sortedPilots = response.data.sort((a, b) => a.firstName.localeCompare(b.firstName));
-            setPilots(sortedPilots);
-            setPilotosFiltrados(sortedPilots); // Inicialmente, mostrar todos
+            const response = await fetch('http://192.168.10.19:4000/api/pilotslist');
+            if (!response.ok){
+                throw new Error("Error al obtener los datos");
+            }
+            const data = await response.json();
+            setPilots(data);
+            setPilotosFiltrados(data);
         } catch (error) {
-            console.error('❌ Error al obtener pilotos:', error.response || error);
+            console.error('❌ Error al obtener pilotos:', error);
             setError('Error al cargar los datos de los pilotos. Por favor, inténtalo de nuevo.');
         } finally {
             setTimeout(() => {
                 setShowLoader(false);
                 setLoading(false);
-            }, 3000);
+            }, 2000);
         }
     };
 
@@ -96,7 +98,7 @@ const PilotsList = () => {
             </Row>
             {pilotosFiltrados.length > 0 ? (
                 <>
-                    <Table striped bordered hover responsive size="sm">
+                    <Table striped bordered hover responsive size="xs">
                         <thead>
                             <tr>
                                 <th>Tipo ID</th>
@@ -116,11 +118,14 @@ const PilotsList = () => {
                                 <th>Numero Licencia</th>
                                 <th>Fecha Certificado Médico</th>
                                 <th>Vencimiento Certificado</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
                             {pilotosFiltrados.map((pilot) => (
+                                
                                 <tr key={pilot.id}>
+            
                                     <td>{pilot.idType}</td>
                                     <td>{pilot.id}</td>
                                     <td>{`${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName}`}</td>

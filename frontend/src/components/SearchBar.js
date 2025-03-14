@@ -2,12 +2,12 @@
 import React, {useState} from "react";
 import {Form, Button, Row, Col} from "react-bootstrap";
 
-const SearchBar = ({onSearch}) => {
-    const [search, setSearch] = useState("");
+const SearchBar = ({search, setSearch, onSearch}) => {
+    
 
     const handleSearch = (event) => {
         event.preventDefault();
-        onSearch(search);
+        onSearch();
     };
 
 return (
@@ -28,10 +28,7 @@ return (
             </Col>
             
             <Col className="text mt-2" sm={4}>
-            
-            <Button variant="primary" type="submit">
-                Buscar
-            </Button>
+        
         
             </Col>
             </Row>

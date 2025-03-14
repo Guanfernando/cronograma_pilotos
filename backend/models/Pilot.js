@@ -103,8 +103,6 @@ const Pilot = sequelize.define('Pilot', {
         allowNull: false
     }
 
-
-
 },{
 
     timestamps: false

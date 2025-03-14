@@ -56,7 +56,7 @@ const PilotsForm = ({ onSubmit }) => {
         <Container className='px-0'>
             <Row style={{ height: "110px" }}>
                 <Col className="text mt-4" sm={10}>
-                    <h2>Registro de Pilotos / Estudiantes</h2>
+                    <h2>Registro de Estudiantes / Pilotos</h2>
                     <h5>Información Personal</h5>
                 </Col>
                 <Col xs={1}>
@@ -99,7 +99,7 @@ const PilotsForm = ({ onSubmit }) => {
 
                     <Col xs={2} md={2}>
                         <Form.Label>Segundo Apellido*</Form.Label>
-                        <Form.Control type="text" name="secondLastName" placeholder="Segundo Apellido" required />
+                        <Form.Control type="text" name="secondLastName" placeholder="Segundo Apellido" />
                     </Col>
                 </Row>
 

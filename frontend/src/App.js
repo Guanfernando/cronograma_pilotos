@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PilotsList from "./components/PilotsList";
 import Mision from "./components/Mision";
+import Admin from "./components/Admin";
 
 
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/api/pilots/" element={<PilotsForm />} />
       <Route path="api/pilotslist" element={<PilotsList/>} />
       <Route path="api/mision" element={<Mision />} />
+      <Route path="api/admin" element={<Admin />} />
       </Routes>
       </BrowserRouter>
       ); 
