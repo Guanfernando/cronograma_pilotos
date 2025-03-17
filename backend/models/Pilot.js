@@ -1,16 +1,18 @@
-//backend/models.pilot.js
+//backend/modelsPilot.js
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/db.js';
 
 const Pilot = sequelize.define('Pilot', {
+    id: {
+        type: DataTypes.INTEGER, 
+        primaryKey: true,       
+        allowNull: false,
+        unique: true            
+    },
+
     idType: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
     },
 
     firstName: {
@@ -18,97 +20,97 @@ const Pilot = sequelize.define('Pilot', {
         allowNull: false
     },
     
-    secondName:{
-     type: DataTypes.STRING,
-    },
-
-    firstLastName:{
+    secondName: {
         type: DataTypes.STRING,
-        allowNull:false
+        allowNull: true
     },
 
-    secondLastName:{
-        type: DataTypes.STRING,
-       
-    },
-
-    birthday:{
+    firstLastName: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    telephoneNumber:{
-        type: DataTypes.INTEGER,
+    secondLastName: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+
+    birthday: {
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
 
-    city:{
+    telephoneNumber: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    address:{
+    city: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    email:{
-        type: DataTypes.STRING,
-        allowNull: false
-        
-    },
-
-    rh:{
-        type:DataTypes.STRING,
-        allowNull: false
-    },
-
-    weight:{
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-
-    eps:{
+    address: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    emergencyContact:{
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isEmail: true
+        }
+    },
+
+    rh: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    emergencyNumber:{
-        type: DataTypes.INTEGER,
+    weight: {
+        type: DataTypes.FLOAT,
         allowNull: false
     },
 
-    licenseType:{
+    eps: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    licenseNumber:{
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-
-    medicalCertificate:{
+    emergencyContact: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    certificateExpiration:{
+    emergencyNumber: {
         type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    licenseType: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    licenseNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+
+    medicalCertificate: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    certificateExpiration: {
+        type: DataTypes.DATEONLY,
         allowNull: false
     }
 
-},{
-
+}, {
     timestamps: false
-
 });
 
 export default Pilot;
-
-

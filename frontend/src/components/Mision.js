@@ -1,3 +1,5 @@
+//src/componenets/Mision.js
+
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Image, Alert, Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +13,33 @@ const Mision = () => {
     const [selectedPilot, setSelectedPilot] = useState(null); // ⬅ Nuevo estado para el piloto seleccionado
     const navigate = useNavigate();
 
+    const handleMissionSubmit = async (formData) => {
+        try {
+            const response = await fetch ("http://192.168.10.19:4000/api/mision", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(formData)
+            })
+            if (response.ok) {
+                alert("Misión agregada con exito!")
+                fetchPilots();
+            }else{
+                const errorDetail = await response.text();
+                console.error("Error del servidor:", errorDetail);
+                setError(`Error al agregar Misión: ${errorDetail}`);
+            }
+        }catch(error){
+            console.error("Errorde conexion: ", error);
+            setError("No fue posible conectarser al servidor")
+        }
+    };
+
 
     useEffect(() => { 
         fetchPilots();
     }, []);
+
+    
 
     const fetchPilots = async () => {
         try {
@@ -99,7 +124,7 @@ const Mision = () => {
                     </tbody>
                 </Table>
             )}
-            {filteredPilots.length === 1 && selectedPilot && <MisionForm pilot={selectedPilot} />}
+            {filteredPilots.length === 1 && selectedPilot && <MisionForm pilot={selectedPilot} onSubmit={handleMissionSubmit} />}
 
         </Container>
     );

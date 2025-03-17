@@ -4,7 +4,10 @@ import express from 'express';
 import { connectDB, sequelize } from './config/db.js';
 import dotenv from 'dotenv';
 import Pilot from './models/Pilot.js';
+import Mision from './models/Mision.js';
 import cors from 'cors';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from "swagger-ui-express";
 
 dotenv.config();
 
@@ -18,7 +21,29 @@ app.use(cors({
     origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type']
-})); 
+}));
+
+//manejo unico de errores
+app.use((err,req,next,res) => {
+console.error("Error", err.message)
+res.status(err.status || 500).json({error:err.message})
+})
+
+
+//documentacion del uso de API REstfull con swagger
+const swaggerOptions ={
+    definition:{
+        openapi:"3.0.0",
+        info: {tittle: "API Pilotos", version:"1.0.0" },
+    },
+    apis: ["./server.js"],
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+console.log("Documentacion disponible en http://localhost:4000/api-docs")
+
 
 // Función asíncrona para iniciar el servidor correctamente
 const startServer = async () => {
@@ -40,14 +65,12 @@ const startServer = async () => {
 // Endpoint para recibir los datos del formulario (frontend-PilotsForm)
 app.post('/api/pilots', async (req, res) => {
     try {
-        const { idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday, rh, weight, eps, emergencyContact, emergencyNumber, licenseType, licenseNumber, medicalCertificate, certificateExpiration } = req.body;
-        const newPilot = await Pilot.create({ idType, id, firstName, secondName, firstLastName, secondLastName, email, telephoneNumber, city, address, birthday,  rh, weight, eps , emergencyContact, emergencyNumber, licenseType, licenseNumber, medicalCertificate, certificateExpiration });
+        const newPilot = await Pilot.create(req.body);
         res.status(201).json(newPilot);
         console.log(req.body);
         console.log('✅ Registro creado con éxito:', newPilot);
-    } catch (error) {  // Capturar el error correctamente
-        console.error("❌ Error al crear el registro:", error);
-        res.status(500).json({ message: 'Error al crear el registro', error: error.message });
+    } catch (error) { 
+       next(error);
     }
 });
 
@@ -58,11 +81,9 @@ app.get('/api/pilotslist', async (req, res) => {
         const pilots = await Pilot.findAll({
             order: [['id', 'ASC']]
         });
-        console.log('✅ Pilotos encontrados:', pilots.length); // Log para debugging
         res.json(pilots);
     } catch (error) {
-        console.error("❌ Error obteniendo los datos:", error);
-        res.status(500).json({ error: 'Error al obtener los registros' });  
+        next(error)
     }
 });
 
@@ -76,10 +97,24 @@ app.get('/api/mision', async (req, res) => {
         console.log('✅ Pilotos encontrados:', pilots.length); // Log para debugging
         res.json(pilots);
     } catch (error) {
-        console.error("❌ Error obteniendo los datos:", error);
-        res.status(500).json({ error: 'Error al obtener los registros' });  
+        next(error)
     }
+
 });
 
+app.post('/api/mision', async (req,res) => {
+    try {
+        const {misionId, misionDate, airplane, description, pilotId} = req.body;
+        if (!misionId || !misionDate || !airplane) {
+            return res.status(400).json({ message: "Todos los registros son obligatorios"})
+        }
+        const newMision = await Mision.create({ misionId, misionDate, airplane, description, pilotId});
+        res.status(201).json(newMision);
+        console.log("✅ Misión registrada:", newMision);
+    } catch (error) {
+       next(error);
+    }
+});
+    
 // Llamar la función para iniciar el servidor
 startServer();

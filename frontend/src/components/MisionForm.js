@@ -11,12 +11,12 @@ const airplanedescriptions = {
     HK5252G: "TECNAM P2002 JF GARMIN"
 };
 
-const MisionForm = (pilot, onSubmit) => {
+const MisionForm = ({pilot, onSubmit}) => {
     const [misionId, setMisionId] = useState("");
     const [misionDate, setMisionDate] = useState("");
     const [airplane, setAirplane] = useState("");
     const [description, setDescription] = useState("");
-    const [Instructor, setInstructor] = useState("");
+    const [instructor, setInstructor] = useState("");
     const [startTime, setStartTime] = useState("");
     const [finalTime, setFinalTime] = useState("");
     
@@ -29,25 +29,37 @@ const handleAirplaneChange = (event) => {
     setDescription(airplanedescriptions[selectedAirplane]);
 }
 
-//funcion para manejar el envio del formulario
-const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = {
-        misionId,
-        misionDate,
-        airplane,
-        description,
-        pilotId: pilot?.id
-    };
-    console.log(formData);
-    onSubmit (formData);
+    // Función para manejar el envío del formulario
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const formData = {
+            pilotId: pilot.id,
+            misionId,
+            misionDate,
+            airplane,
+            description,
+            instructor,
+            startTime,
+            finalTime
+        };
+        console.log(formData);
+        onSubmit(formData);
 
-}
+        // Limpiar el formulario
+        setMisionId("");
+        setMisionDate("");
+        setAirplane("");
+        setDescription("");
+        setInstructor("");
+        setStartTime("");
+        setFinalTime("");
+    };
+    console.log("Datos del piloto:", pilot);
 
 
     return (
         <Container>
-        <Form handleSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
         <Row className="mb-1">
         <Col xs={2} md={2}>
 
@@ -57,7 +69,7 @@ const handleSubmit = (event) => {
 
         <Col xs={2} md={2}>
             <Form.Label>Fecha*</Form.Label>
-            <Form.Control type="Date" name="misionDate" required />
+            <Form.Control type="Date" value={misionDate} onChange={(e) => setMisionDate(e.target.value)} required />
         </Col>
         <Col xs={2} md={2}>
             <Form.Label>Aeronave*</Form.Label>
@@ -71,7 +83,7 @@ const handleSubmit = (event) => {
         </Col>
         <Col xs={2} md={3}>
             <Form.Label>Descripción</Form.Label>
-            <Form.Control type="text" name="instructor" value={description} disabled />
+            <Form.Control type="text" value={description} disabled />
         </Col>
         {/*<Col xs={2} md={3}>
         <Form.Label>Instructor*</Form.Label>
@@ -95,25 +107,11 @@ const handleSubmit = (event) => {
             </Col>*/}
         </Row>
         <Col>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
+        <Button variant="primary" type="submit">
             Guardar
         </Button>
         </Col>
         </Form>
-        <Row className="mt-4">
-                <Col>
-                    <h5>Datos del Piloto</h5>
-                    <p><strong>Nombre:</strong> {`${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName}`}</p>
-                    <p><strong>ID:</strong> {pilot.id}</p>
-                    <p><strong>Tipo ID:</strong> {pilot.idType}</p>
-                    <p><strong>Rh:</strong> {pilot.rh}</p>
-                    <p><strong>Peso:</strong> {pilot.weight} Kg</p>
-                    <p><strong>Tipo Licencia:</strong> {pilot.licenseType}</p>
-                    <p><strong>Número Licencia:</strong> {pilot.licenseNumber}</p>
-                    <p><strong>Fecha Certificado Médico:</strong> {pilot.medicalCertificate}</p>
-                    <p><strong>Vencimiento Certificado:</strong> {pilot.certificateExpiration}</p>
-                </Col>
-            </Row>
             </Container>
     
     );
