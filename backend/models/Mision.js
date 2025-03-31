@@ -4,36 +4,36 @@ import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../config/db.js"; 
 
 const Mision = sequelize.define("Mision", {
-
-    //estabecer relacion con la clave foranea 
-        pilotId:{
+    pilotId:{
         type: DataTypes.INTEGER, 
         allowNull: false,
-       references:{
-        model:"pilots",
-        key:"id"
-       }
+        references:{
+            model: "pilots",
+            key: "id"
+        },
+        field: 'pilotid'  // Añadido field para mapeo correcto
     },
     misionId: {
         type: DataTypes.INTEGER, 
-        allowNull: false,
         primaryKey: true,
-        autoIncrement: true, 
+        allowNull: false,
+        field: 'misionid',    // Añadido field para mapeo correcto
     },
     misionDate: {
         type: DataTypes.DATE,
-        allowNull: false
+        field: 'misiondate'
     },
     airplane: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'airplane'
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: false
+        field: 'description'
     }
 }, {
-    tableName: "misions", 
+    tableName: "misions",
     timestamps: false 
 });
 

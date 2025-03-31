@@ -50,7 +50,7 @@ const startServer = async () => {
             console.log(`✅ Servidor conectado en el puerto http://localhost:${PORT}`);
         });
     } catch (error) {
-        console.error("❌ Error al iniciar el servidor:", error);
+        console.error(`❌ Error al iniciar el servidor en: http://localhost:${PORT}`, error);
     }
 };
 
