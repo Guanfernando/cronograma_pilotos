@@ -44,7 +44,7 @@ const PilotsList = () => {
     // Función para obtener pilotos
     const fetchPilots = async () => {
         try {
-            const response = await fetch('http://192.168.10.19:4000/api/pilotslist');
+            const response = await fetch('http://localhost:4000/api/pilotslist');
             if (!response.ok){
                 throw new Error("Error al obtener los datos");
             }

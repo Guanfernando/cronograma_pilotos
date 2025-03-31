@@ -100,13 +100,13 @@ const Pilot = sequelize.define('Pilot', {
     },
 
     medicalCertificate: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.DATEONLY,
+        
     },
 
     certificateExpiration: {
         type: DataTypes.DATEONLY,
-        allowNull: false
+       
     }
 
 }, {

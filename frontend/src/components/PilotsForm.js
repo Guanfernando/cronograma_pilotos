@@ -31,11 +31,12 @@ const PilotsForm = ({ onSubmit }) => {
             emergencyNumber: formData.get("emergencyNumber"),
             licenseType: formData.get("licenseType"),
             licenseNumber: formData.get("licenseNumber"),
-
+            medicalCertificate: formData.get("medicalCertificate"),
+        certificateExpiration: formData.get("certificateExpiration")
         };
-
+        
         try {
-            const response = await fetch('http://192.168.10.19:4000/api/pilots', {
+            const response = await fetch('http://localhost:4000/api/pilots', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
