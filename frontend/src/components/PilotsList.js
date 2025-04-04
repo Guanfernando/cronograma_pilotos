@@ -1,4 +1,4 @@
-//src/components/PilotsList.js
+// src/components/PilotsList.js
 import React, { useEffect, useState } from "react";
 import { Table, Alert, Button, Col, Image, Row } from "react-bootstrap";
 import Loader from "./Loader";
@@ -11,41 +11,26 @@ const PilotsList = () => {
     const [pilots, setPilots] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [search, setSearch] = useState("");
     const [showLoader, setShowLoader] = useState(true);
     const [pilotosFiltrados, setPilotosFiltrados] = useState([]);
     const navigate = useNavigate();
 
-    // Función para manejar la búsqueda
-    const handleSearch = (query) => {
-        if (!query) {
-            setPilotosFiltrados(pilots); // Si no hay búsqueda, mostrar todos
-            return;
-        }
+    // Buscar automáticamente al cambiar "search"
+    useEffect(() => {
         const resultados = pilots.filter((pilot) =>
             `${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName} ${pilot.id}`
                 .toLowerCase()
-                .includes(query.toLowerCase())
+                .includes(search.toLowerCase())
         );
-        setPilotosFiltrados(resultados);
-    };
+        setPilotosFiltrados(search ? resultados : pilots);
+    }, [search, pilots]);
 
-    // Función para exportar datos a Excel
-    const handleExportExcel = () => {
-        const worksheet = XLSX.utils.json_to_sheet(pilotosFiltrados.length > 0 ? pilotosFiltrados : pilots);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "PilotsList");
-
-        // Guardar el archivo
-        const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
-        const data = new Blob([excelBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8" });
-        saveAs(data, "PilotsList.xlsx");
-    };
-
-    // Función para obtener pilotos
+    // Obtener datos
     const fetchPilots = async () => {
         try {
             const response = await fetch('http://localhost:4000/api/pilotslist');
-            if (!response.ok){
+            if (!response.ok) {
                 throw new Error("Error al obtener los datos");
             }
             const data = await response.json();
@@ -66,16 +51,28 @@ const PilotsList = () => {
         fetchPilots();
     }, []);
 
-    if (loading && showLoader) {
-        return <Loader />;
-    }
+    // Exportar a Excel
+    const handleExportExcel = () => {
+        const dataToExport = pilotosFiltrados.length > 0 ? pilotosFiltrados : pilots;
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "PilotsList");
+
+        const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+        const data = new Blob([excelBuffer], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"
+        });
+        saveAs(data, "PilotsList.xlsx");
+    };
+
+    if (loading && showLoader) return <Loader />;
 
     if (error) {
         return (
             <div className="container mt-4">
                 <Alert variant="danger">
                     {error}
-                    <Button variant="primary" onClick={fetchPilots} className="mt-8">
+                    <Button variant="primary" onClick={fetchPilots} className="mt-3">
                         Reintentar
                     </Button>
                 </Alert>
@@ -85,20 +82,29 @@ const PilotsList = () => {
 
     return (
         <div className="px-5">
-            <Row style={{ height: "110px" }}>
-                <Col className="text mt-4" sm={10}>
+            <Row className="my-4">
+                <Col sm={10}>
                     <h2>Información de Estudiantes/Pilotos</h2>
                 </Col>
-                <Col xs={1}>
-                    <Image width={140} src="/flying.png" onClick={() => navigate("/")} />
+                <Col xs={2} className="text-end">
+                    <Image
+                        width={140}
+                        src="/flying.png"
+                        alt="Volver al inicio"
+                        title="Volver al inicio"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => navigate("/")}
+                    />
                 </Col>
             </Row>
-            <Row style={{ height: "110px" }}>
-            <SearchBar onSearch={handleSearch} />
+
+            <Row className="mb-4">
+                <SearchBar search={search} setSearch={setSearch} />
             </Row>
+
             {pilotosFiltrados.length > 0 ? (
                 <>
-                    <Table striped bordered hover responsive size="xs">
+                    <Table striped bordered hover responsive size="sm">
                         <thead>
                             <tr>
                                 <th>Tipo ID</th>
@@ -113,19 +119,16 @@ const PilotsList = () => {
                                 <th>Peso Kg.</th>
                                 <th>EPS</th>
                                 <th>Contacto de Emergencia</th>
-                                <th>Telefono de Emergencia</th>
-                                <th>Typo Licencia</th>
-                                <th>Numero Licencia</th>
+                                <th>Teléfono de Emergencia</th>
+                                <th>Tipo Licencia</th>
+                                <th>Número Licencia</th>
                                 <th>Fecha Certificado Médico</th>
                                 <th>Vencimiento Certificado</th>
-                               
                             </tr>
                         </thead>
                         <tbody>
                             {pilotosFiltrados.map((pilot) => (
-                                
                                 <tr key={pilot.id}>
-            
                                     <td>{pilot.idType}</td>
                                     <td>{pilot.id}</td>
                                     <td>{`${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName}`}</td>
@@ -147,10 +150,13 @@ const PilotsList = () => {
                             ))}
                         </tbody>
                     </Table>
-                    <Button onClick={handleExportExcel} style={{ marginBottom: "5px" }}>Convertir a XLSX</Button>
+
+                    <Button onClick={handleExportExcel} className="mb-3">
+                        Convertir a XLSX
+                    </Button>
                 </>
             ) : (
-                <p>No hay pilotos registrados</p>
+                <Alert variant="info">No hay pilotos registrados con los criterios actuales.</Alert>
             )}
         </div>
     );

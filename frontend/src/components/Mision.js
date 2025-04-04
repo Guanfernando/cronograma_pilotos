@@ -66,8 +66,8 @@ const Mision = () => {
     return (
         <Container className='px-0'>
             <Row style={{ height: "110px" }}>
-                <Col className="text mt-4" sm={10}>
-                    <h2>Registro de la formación operacional</h2>
+                <Col className="text mt-4" sm={10}> 
+                    <h2>Registro de vuelo</h2>
                 </Col>
                 <Col xs={1}>
                     <Image width={140} src="/flying.png" onClick={() => navigate("/")} />

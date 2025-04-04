@@ -1,6 +1,12 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const StageForm = () =>{
+
+
+    const navigate = useNavigate();
+
 
     const handleSubmit = async (event) => {
          
@@ -8,8 +14,20 @@ const StageForm = () =>{
 
 
     return (
+        <Container>
+            <Row>
+                <Col> 
+                    <h3>Agregar Etapa</h3>
+                </Col>
+            </Row>
+
+            
         
-        <h1>respuesta StageForm</h1> 
+
+
+
+        </Container>
+         
     )
 };
 

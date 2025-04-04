@@ -22,7 +22,7 @@ const Admin = () => {
     
     return (
         <Container className='px-0'>
-        <Row style={{ height: "110px" }}>
+        <Row style={{ height: "150px" }}>
             <Col className="text mt-4" sm={10}>
                 <h2>Administrador</h2>
             </Col>
@@ -30,8 +30,8 @@ const Admin = () => {
                 <Image width={140} src="/flying.png" onClick={() => navigate("/")} />
             </Col>
         </Row>
-        <Row style={{ height: "110px" }}>
-            <Col>
+        <Row style={{ height: "50px" }}>
+            <Col >
             <Button onClick={() => setFormulario("user")}>Nuevo Usuario</Button>
             </Col>
             <Col>
