@@ -153,7 +153,7 @@ const PilotsList = () => {
 
                     <Button onClick={handleExportExcel} className="mb-3">
                         Convertir a XLSX
-                    </Button>
+                    </Button> 
                 </>
             ) : (
                 <Alert variant="info">No hay pilotos registrados con los criterios actuales.</Alert>

@@ -3,13 +3,12 @@
 import express from 'express';
 import { connectDB, sequelize } from './config/db.js';
 import dotenv from 'dotenv';
-import Pilot from './models/Pilot.js';
-import Mision from './models/Mision.js';
 import cors from 'cors';
 import swaggerSpec from './docs/swagger.js';
 import swaggerUi from "swagger-ui-express";
 import pilotsRouter from './routes/pilots.routes.js';
 import misionRouter from './routes/misions.routes.js';
+import airplanesRouter from './routes/airplanes.routes.js';
 
 
 dotenv.config();
@@ -36,6 +35,7 @@ console.log("Documentacion disponible en http://localhost:4000/api-docs")
 //usar las rutas importadas
 app.use(pilotsRouter);
 app.use(misionRouter);
+app.use(airplanesRouter);
 
 // Función asíncrona para iniciar el servidor correctamente
 const startServer = async () => {

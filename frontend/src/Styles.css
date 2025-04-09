@@ -1,12 +1,15 @@
 *{ 
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'century gothic';
+    font-size: 13px;
     color: rgb(0, 0, 0);
-    background-color: rgb(184, 197, 212);
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    background-color: rgb(144, 181, 224);
     font-style: italic;
 }
 
 /*body{
-    background-image: url("/public/fondoapp.jpg");
+    background-image: url("/public/fondoapp.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -15,8 +18,8 @@
 
 
 th, td {
-    padding: 5px;  /* Reducir el padding */
-    height: 30px;  /* Altura fija para las filas */
+    padding: 50px;  /* Reducir el padding */
+    height: 15px;  /* Altura fija para las filas */
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
     overflow: hidden;
     text-overflow: ellipsis; /* Si el texto es largo, lo corta con "..." */
@@ -26,7 +29,7 @@ th, td {
     margin: 20px;
     cursor: pointer;
     transition: transform 0.2s;
-    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.2);
+    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.8);
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     border-right: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;

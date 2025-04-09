@@ -1,55 +1,33 @@
 import { Col, Row, Image, Container, Form, Button } from 'react-bootstrap';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const PilotsForm = ({ onSubmit }) => {
-    const formRef = useRef(null);
+const PilotsForm = () => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-        // Obtener datos del formulario
-        const formData = new FormData(formRef.current);
-        const data = {
-            idType: formData.get("idType"),
-            id: formData.get("id"),
-            firstName: formData.get("firstName"),
-            secondName: formData.get("secondName"),
-            firstLastName: formData.get("firstLastName"),
-            secondLastName: formData.get("secondLastName"),
-            email: formData.get("email"),
-            telephoneNumber: formData.get("telephoneNumber"),
-            city: formData.get("city"),
-            address: formData.get("address"),
-            birthday: formData.get("birthday"),
-            rh: formData.get("rh"),
-            weight: formData.get("weight"),
-            eps: formData.get("eps"),
-            emergencyContact: formData.get("emergencyContact"),
-            emergencyNumber: formData.get("emergencyNumber"),
-            licenseType: formData.get("licenseType"),
-            licenseNumber: formData.get("licenseNumber"),
-            medicalCertificate: formData.get("medicalCertificate"),
-        certificateExpiration: formData.get("certificateExpiration")
-        };
+        // Convertir formulario a objeto directamente
+        const formData = Object.fromEntries(new FormData(event.target));
         
         try {
             const response = await fetch('http://localhost:4000/api/pilots', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                body: JSON.stringify(formData),
             });
 
             if (response.ok) {
                 setMessage('Piloto agregado con éxito!');
-                formRef.current.reset(); // 🔹 Limpia todos los inputs del formulario
+                event.target.reset();
             } else {
                 setMessage('Error al agregar piloto, verifique todos los campos o si el registro ya existe!');
             }
         } catch (error) {
             console.error('Error de conexión', error);
+            setMessage('Error de conexión con el servidor');
         }
     };
 
@@ -65,7 +43,7 @@ const PilotsForm = ({ onSubmit }) => {
                 </Col>
             </Row>
   
-            <Form ref={formRef} onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <Row className="mb-1">
                     <Col xs={2} md={2}>
                         <Form.Label>Tipo Documento</Form.Label>

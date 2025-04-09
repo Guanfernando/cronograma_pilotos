@@ -4,8 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Image, Alert, Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import MisionForm from "./MisionForm";
-
+import SheetForm from "./SheetForm";
 const Mision = () => {
     const [pilots, setPilots] = useState([]);
     const [error, setError] = useState(null);
@@ -92,13 +91,9 @@ const Mision = () => {
                 <Table striped bordered hover responsive size="xs">
                     <thead>
                         <tr>
-                            <th>Tipo ID</th>
                             <th>ID</th>
                             <th>Nombres</th>
-                            <th>Rh</th>
-                            <th>Peso Kg.</th>
                             <th>Tipo Licencia</th>
-                            <th>Número Licencia</th>
                             <th>Fecha Certificado Médico</th>
                             <th>Vencimiento Certificado</th>
                             <th>Acciones</th>
@@ -107,13 +102,9 @@ const Mision = () => {
                     <tbody>
                         {filteredPilots.map((pilot) => (
                             <tr key={pilot.id}>
-                                <td>{pilot.idType}</td>
                                 <td>{pilot.id}</td>
                                 <td>{`${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName}`}</td>
-                                <td>{pilot.rh}</td>
-                                <td>{pilot.weight}</td>
                                 <td>{pilot.licenseType}</td>
-                                <td>{pilot.licenseNumber}</td>
                                 <td>{pilot.medicalCertificate}</td>
                                 <td>{pilot.certificateExpiration}</td>
                                 <td>
@@ -126,7 +117,7 @@ const Mision = () => {
                     </tbody>
                 </Table>
             )}
-            {filteredPilots.length === 1 && selectedPilot && <MisionForm pilot={selectedPilot} onSubmit={handleMissionSubmit} />}
+            {filteredPilots.length === 1 && selectedPilot && <SheetForm pilot={selectedPilot} onSubmit={handleMissionSubmit} />}
 
         </Container>
     );

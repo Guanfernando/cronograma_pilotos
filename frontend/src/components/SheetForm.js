@@ -1,21 +1,12 @@
 // compoenente para el formulario de misiones enlazado al componente Mision.js
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
-
-//datos de las aeronaves
-const airplanedescriptions = {
-    HK5092G: "TECNAM P2002 JF ANÁLOGO",
-    HK5183G: "TECNAM P2002 JF ANÁLOGO",
-    HK5206G: "TECNAM P2002 JF GARMIN", 
-    HK5252G: "TECNAM P2002 JF GARMIN"
-};
-
-
-
-const MisionForm = ({pilot, onSubmit}) => {
+const SheetForm = ({pilot, onSubmit}) => {
     const [sheetId, setsheetId] = useState("");
     const [misionDate, setMisionDate] = useState("");
+    const [airplaneList, setAirplaneList] = useState([]);
     const [airplane, setAirplane] = useState("");
     const [description, setDescription] = useState("");
     const [initialFuel, setInitialFuel] = useState("");
@@ -26,15 +17,37 @@ const MisionForm = ({pilot, onSubmit}) => {
     const [finalTime, setFinalTime] = useState("");
     const [fuelLoad, setFuelLoad] = useState("");
     
+    //funcion para cargar la lista de aeronaves
+    useEffect(() => {
+        const fetchAirplaneList = async () => {
+            try {
+                const response = await axios.get("http://localhost:4000/api/airplane");
+                setAirplaneList(response.data); 
+            } catch (error) {
+                console.error("Datos no encontrados", error);
+            }
+        };
+        fetchAirplaneList();
+
+    }, [])
+
 
 
     //funcion para cambiar la descripcion de la aeronave
-    const handleAirplaneChange = (event) => {
-        const selectedAirplane = event.target.value;
-        setAirplane(selectedAirplane);
-        setDescription(airplanedescriptions[selectedAirplane]);
+    const handleAirplaneChange = async (event) => {
+       const selectedAirplane = event.target.value;
+       setAirplane(selectedAirplane);
+       if (selectedAirplane) {       
+            try {
+                const response = await axios.get(`http://localhost:4000/api/airplane/${selectedAirplane}`)
+                setDescription(response.data.airplaneModel);
+            } catch (error) {
+                console.error("Error al obtener la descripción de la aeronave:", error);
+            }
+       } else { 
+        setDescription("");
+       }
     }
-
 
     // Función para manejar el envío del formulario
     const handleSubmit = (event) => {
@@ -88,12 +101,9 @@ const MisionForm = ({pilot, onSubmit}) => {
         </Col>
         <Col xs={2} md={2}>
             <Form.Label>Aeronave*</Form.Label>
-                <Form.Select name="airplane" value={airplane} onChange={handleAirplaneChange} required>
+                <Form.Select value={airplane} onChange={handleAirplaneChange} required>
                     <option value="">Seleccione</option>
-                    <option value="HK5092G">HK5092G</option>
-                    <option value="HK5183G">HK5183G</option>
-                    <option value="HK5206G">HK5206G</option>
-                    <option value="HK5252G">HK5252G</option>
+                    {airplaneList.map((plane) => (<option key={plane.airplaneId} value={plane.airplaneId}>{plane.airplaneId}</option>))}
                 </Form.Select>
         </Col>
         <Col xs={2} md={3}>
@@ -109,6 +119,10 @@ const MisionForm = ({pilot, onSubmit}) => {
             <Form.Control type="number" name="finalFuel" required />
         </Col>
         <Col xs={2} md={1}>
+            <Form.Label>Carga GLS</Form.Label>
+            <Form.Control type="number" name="fuelLoad" required />
+        </Col>
+        <Col xs={2} md={1}>
             <Form.Label>Consumo</Form.Label>
             <Form.Control type="number" name={fuelConsumption} required/>
         </Col>
@@ -120,15 +134,9 @@ const MisionForm = ({pilot, onSubmit}) => {
             </Col>
             <Col xs={2} md={2}>
             <Form.Label>Hora Fin</Form.Label>
-            <Form.Control type="time" name="finaltime" required />
+            <Form.Control type="time" name="finalTime" required />
             </Col>
 
-            </Row>
-            <Row className="mb-3">
-            <Col xs={2} md={1}>
-            <Form.Label>Carga GLS</Form.Label>
-            <Form.Control type="number" name="fuelLoad" required />
-            </Col>
             </Row>
        
         <Col>
@@ -143,4 +151,4 @@ const MisionForm = ({pilot, onSubmit}) => {
     );
 };
 
-export default MisionForm;
+export default SheetForm;
