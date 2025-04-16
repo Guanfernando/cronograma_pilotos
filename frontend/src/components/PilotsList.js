@@ -16,6 +16,7 @@ const PilotsList = () => {
     const [pilotosFiltrados, setPilotosFiltrados] = useState([]);
     const navigate = useNavigate();
 
+
     // Buscar automáticamente al cambiar "search"
     useEffect(() => {
         const resultados = pilots.filter((pilot) =>
@@ -29,7 +30,7 @@ const PilotsList = () => {
     // Obtener datos
     const fetchPilots = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/pilotslist');
+            const response = await fetch('http://192.168.10.19:4000/api/pilotslist');
             if (!response.ok) {
                 throw new Error("Error al obtener los datos");
             }
@@ -86,7 +87,7 @@ const PilotsList = () => {
                 <Col sm={10}>
                     <h2>Información de Estudiantes/Pilotos</h2>
                 </Col>
-                <Col xs={2} className="text-end">
+                <Col xs={12} className="text-end">
                     <Image
                         width={140}
                         src="/flying.png"

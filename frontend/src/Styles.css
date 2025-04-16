@@ -2,19 +2,16 @@
     font-family: 'century gothic';
     font-size: 13px;
     color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    background-color: rgb(144, 181, 224);
     font-style: italic;
 }
 
-/*body{
+body{
     background-image: url("/public/fondoapp.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-}*/
+}
 
 
 th, td {

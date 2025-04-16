@@ -48,7 +48,7 @@ misionRouter.get('/api/mision', async (req, res, next) => {
  *                 format: date
  *               airplane:
  *                 type: string
- *               description:
+ *               descriptionAirplane:
  *                 type: string
  *               pilotId:
  *                 type: integer
@@ -62,13 +62,12 @@ misionRouter.get('/api/mision', async (req, res, next) => {
  */
 misionRouter.post('/api/mision', async (req,res, next) => {
     try {
-        const {misionId, misionDate, airplane, description, pilotId} = req.body;
-        if (!misionId || !misionDate || !airplane) {
-            return res.status(400).json({ message: "Todos los registros son obligatorios"})
-        }
-        const newMision = await Mision.create({ misionId, misionDate, airplane, description, pilotId});
-        res.status(201).json(newMision);
-        console.log("✅ Misión registrada:", newMision);
+        const newSheet = await Mision.create(req.body);
+        if (!req.body.sheetId) {
+            return res.status(400).json({ message: "El numero de hoja es obligatorio" });
+        } else
+        res.status(201).json(newSheet);
+        console.log("✅ Hoja registrada con exito:", newSheet);
     } catch (error) {
        next(error);
     }

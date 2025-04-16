@@ -1,4 +1,4 @@
-//src/componenets/Mision.js
+/*//src/componenets/Mision.js
 
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Image, Alert, Button, Table } from "react-bootstrap";
@@ -15,7 +15,7 @@ const Mision = () => {
     const handleMissionSubmit = async (formData) => {
         console.log("Formulario enviado:", formData);
         try {
-            const response = await fetch ("http://localhost:4000/api/mision", {
+            const response = await fetch ("http://192.168.10.19:4000/api/mision", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
@@ -34,16 +34,14 @@ const Mision = () => {
         }
     };
 
-
     useEffect(() => { 
         fetchPilots();
     }, []);
 
     
-
     const fetchPilots = async () => {
         try {
-            const response = await fetch("http://localhost:4000/api/mision");
+            const response = await fetch("http://192.168.10.19:4000/api/mision");
             if (!response.ok) {
                 throw new Error("Error al obtener los datos");
             }
@@ -86,27 +84,19 @@ const Mision = () => {
                 </Alert>
             )}
 
-            {/* Mostrar la tabla solo si hay pilotos filtrados */}
+           
             {filteredPilots.length > 0 && (
                 <Table striped bordered hover responsive size="xs">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nombres</th>
-                            <th>Tipo Licencia</th>
-                            <th>Fecha Certificado Médico</th>
-                            <th>Vencimiento Certificado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredPilots.map((pilot) => (
                             <tr key={pilot.id}>
-                                <td>{pilot.id}</td>
                                 <td>{`${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName}`}</td>
-                                <td>{pilot.licenseType}</td>
-                                <td>{pilot.medicalCertificate}</td>
-                                <td>{pilot.certificateExpiration}</td>
                                 <td>
                                     <Button variant= "success" onClick={ () => setSelectedPilot(pilot)}>
                                         Agregar
@@ -121,6 +111,6 @@ const Mision = () => {
 
         </Container>
     );
-};
+}
 
-export default Mision;
+export default Mision;*/

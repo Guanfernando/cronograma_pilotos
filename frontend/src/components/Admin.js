@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import UserForm from "./UserForm";
-import InstructorForm from "./InstructorForm";
 import StageForm from "./StageForm";
 import AirplaneForm from "./AirplaneForm";
 
@@ -14,7 +13,6 @@ const Admin = () => {
 
     const forms = {
         user: <UserForm />,
-        instructor: <InstructorForm />,
         stage: <StageForm />,
         airplane: <AirplaneForm />
     }
@@ -33,9 +31,6 @@ const Admin = () => {
         <Row style={{ height: "50px" }}>
             <Col >
             <Button onClick={() => setFormulario("user")}>Nuevo Usuario</Button>
-            </Col>
-            <Col>
-            <Button onClick={() => setFormulario("instructor")}>Nuevo Instructor</Button>
             </Col>
             <Col>
             <Button onClick={() => setFormulario("stage")}>Nueva Etapa</Button>

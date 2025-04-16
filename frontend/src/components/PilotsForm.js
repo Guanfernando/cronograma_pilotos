@@ -13,7 +13,7 @@ const PilotsForm = () => {
         const formData = Object.fromEntries(new FormData(event.target));
         
         try {
-            const response = await fetch('http://localhost:4000/api/pilots', {
+            const response = await fetch('http://192.168.10.19:4000/api/pilots', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -56,61 +56,61 @@ const PilotsForm = () => {
                         </Form.Select>
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Número Documento*</Form.Label>
                         <Form.Control type="number" name="id" placeholder="Documento" required />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Primer Nombre*</Form.Label>
                         <Form.Control type="text" name="firstName" placeholder="Primer Nombre" required />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Segundo Nombre</Form.Label>
                         <Form.Control type="text" name="secondName" placeholder="Segundo Nombre" />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Primer Apellido*</Form.Label>
                         <Form.Control type="text" name="firstLastName" placeholder="Primer Apellido" required />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Segundo Apellido*</Form.Label>
                         <Form.Control type="text" name="secondLastName" placeholder="Segundo Apellido" />
                     </Col>
                 </Row>
 
                 <Row className="mb-1">
-                    <Col xs={2} md={4}>
+                    <Col xs={12} md={4}>
                         <Form.Label>Correo Electrónico*</Form.Label>
                         <Form.Control type="email" name="email" placeholder="Correo Electrónico" required />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Teléfono*</Form.Label>
                         <Form.Control type="number" name="telephoneNumber" placeholder="Teléfono" required />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Ciudad*</Form.Label>
                         <Form.Control type="text" name="city" placeholder="Ciudad" required />
                     </Col>
 
-                    <Col xs={2} md={4}>
+                    <Col xs={12} md={4}>
                         <Form.Label>Dirección*</Form.Label>
                         <Form.Control type="text" name="address" placeholder="Dirección Domicilio" required />
                     </Col>
                     </Row>
 
                     <Row className="mb-1">
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Fecha de Nacimiento*</Form.Label>
                         <Form.Control type="date" name="birthday" required />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Rh*</Form.Label>
                         <Form.Select name="rh" required>
                             <option value="">Seleccione</option>
@@ -125,23 +125,23 @@ const PilotsForm = () => {
                         </Form.Select>
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Peso en Kg.*</Form.Label>
                         <Form.Control type="number" name="weight" placeholder="Peso en Kg." required />
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>EPS*</Form.Label>
                         <Form.Control type="text" name="eps" placeholder="EPS" required />
                     </Col>
                 </Row>
 
                 <Row className="mb-4">
-                    <Col xs={2} md={3}>
+                    <Col xs={12} md={3}>
                         <Form.Label>Contacto de Emergencia</Form.Label>
                         <Form.Control type="text" name="emergencyContact" placeholder="Nombre" required />
                     </Col>
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Telefono</Form.Label>
                         <Form.Control type="number" name="emergencyNumber" placeholder="Telefono" required />
                     </Col>
@@ -151,7 +151,7 @@ const PilotsForm = () => {
                 </Row>
 
                 <Row className="mb-1">
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Tipo de Licencia</Form.Label>
                         <Form.Select name="licenseType" required>
                             <option value="">Seleccione</option>
@@ -162,11 +162,11 @@ const PilotsForm = () => {
                         </Form.Select>
                     </Col>
 
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Numero de Licencia*</Form.Label>
                         <Form.Control type="number" name="licenseNumber" placeholder="Numero Licencia" required />
                     </Col>
-                    <Col xs={2} md={2}>
+                    <Col xs={12} md={2}>
                         <Form.Label>Certificado Médico*</Form.Label>
                         <Form.Control type="date" name="medicalCertificate" required />
                         <Form.Label>Fecha de Vencimiento*</Form.Label>

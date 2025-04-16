@@ -6,7 +6,7 @@ const Pilot = sequelize.define('pilots', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
-        unique: true,
+        unique: true, 
         field: 'id'
     },
     idType: {

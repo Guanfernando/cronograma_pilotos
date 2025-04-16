@@ -4,23 +4,25 @@ import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../config/db.js"; 
 
 const Mision = sequelize.define("Mision", {
-    pilotId:{
+   /* pilotId:{
         type: DataTypes.INTEGER, 
         allowNull: false,
         references:{
             model: "pilots",
             key: "id"
         },
-        field: 'pilotid'  // Añadido field para mapeo correcto
-    },
-    misionId: {
+        field: 'pilotid'
+    },*/
+
+    sheetId: {
         type: DataTypes.INTEGER, 
         primaryKey: true,
         allowNull: false,
-        field: 'misionid',    // Añadido field para mapeo correcto
+        field: 'sheetid'
     },
     misionDate: {
         type: DataTypes.DATE,
+        allowNull: false,
         field: 'misiondate'
     },
     airplane: {
@@ -28,9 +30,73 @@ const Mision = sequelize.define("Mision", {
         allowNull: false,
         field: 'airplane'
     },
-    description: {
+    descriptionAirplane: {
         type: DataTypes.STRING,
-        field: 'description'
+        field: 'descriptionairplane'
+    },
+    initialFuel: {
+        type: DataTypes.INTEGER,
+        field: 'initialfuel'
+    },
+    finalFuel: {
+        type: DataTypes.INTEGER,
+        field: 'finalfuel'
+    },
+    loadFuel: {
+        type: DataTypes.INTEGER,
+        field: 'loadfuel'
+    },
+    fuelConsumption: {
+        type: DataTypes.INTEGER,
+        field: 'fuelconsumption'
+    },
+    /*instructor: {
+        type: DataTypes.STRING,
+        field: 'instructor'
+    },*/
+    initialHourMeter: {
+        type: DataTypes.TIME,
+        field: 'initialhourmeter'
+    },
+    finalHourMeter: {
+        type: DataTypes.TIME,
+        field: 'finalhourmeter'
+    },
+    TotalHourMeter: {
+        type: DataTypes.TIME,
+        field: 'totalhourmeter'
+    },
+    initialTsnMotor: {
+        type: DataTypes.INTEGER,
+        field: 'initialtsnmotor'
+    },
+    finalTsnMotor: {
+        type: DataTypes.INTEGER,
+        field: 'finaltsnmotor'
+    },
+    initialTsoMotor: {
+        type: DataTypes.INTEGER,
+        field: 'initialtsomotor'
+    },
+    finalTsoMotor: {
+        type: DataTypes.INTEGER,
+        field: 'finaltsomotor'
+    },
+    initialTsnPropeller: {
+        type: DataTypes.INTEGER,
+        field: 'initialtsnpropeller'
+    },
+    finalTsnPropeller: {
+        type: DataTypes.INTEGER,
+        field: 'finaltsnpropeller'
+    },
+    initialTsoPropeller: {
+        type: DataTypes.INTEGER,
+        field: 'initialtsopropeller'
+    },
+    finalTsoPropeller: {
+        type: DataTypes.INTEGER,
+        field: 'finaltsopropeller'
     }
 }, {
     tableName: "misions",
