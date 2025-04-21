@@ -1,4 +1,4 @@
-// compoenente para el formulario de misiones enlazado al componente Mision.js
+// compoenente para el formulario de hoja de vuelo enlazado al componente Mision.js
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button, Image  } from "react-bootstrap";
@@ -52,7 +52,20 @@ const SheetForm = ({pilot}) => {
         }
     };
 
+    //calcular el consumo usando useEffect
+    useEffect(() => {
+        const initial = parseInt(initialFuel);
+        const final = parseInt(finalFuel);
+        const load = parseInt(loadFuel);
+        if (initialFuel && finalFuel) {
+            const consumption = (initial + load) - final;
+            setFuelConsumption(consumption);
+        } else {
+            setFuelConsumption("");
+        }
+    }, [initialFuel, finalFuel, loadFuel]);
 
+    //funcion para traer el nombre del piloto
 
     //funcion para cargar la lista de aeronaves
     useEffect(() => {
@@ -134,10 +147,6 @@ const SheetForm = ({pilot}) => {
         setInitialTsoPropeller("");
         setFinalTsoPropeller("");
 
-
-
-
-        // Redirigir a la página de inicio
     };
     console.log("Datos del piloto:", pilot);
 
@@ -189,7 +198,7 @@ const SheetForm = ({pilot}) => {
         </Col>
         <Col xs={12} md={1}>
             <Form.Label>Consumo</Form.Label>
-            <Form.Control type="number" value={fuelConsumption} onChange={(e) => setFuelConsumption (e.target.value)} />
+            <Form.Control type="number" value={fuelConsumption} readOnly />
         </Col>
         </Row>
         <Row className="mb-5">
@@ -239,17 +248,13 @@ const SheetForm = ({pilot}) => {
             </Col>
             </Row>
             <Row className="mb-5">
-            <Col xs={2} md={2}>
-            {/*<Form.Label>Aeronave*</Form.Label>
-                <Form.Select value={pilot} onChange={handlePilotChange} required>
-                <option value="">Seleccione</option>
-                {PilotsList.map((plane) => (<option key={plane.pilotName} value={plane.pilotName}>{plane.airplaneId}</option>))}
-            </Form.Select>*/}
-        </Col>
+            {/*<Col xs={2} md={2}>
+            <Form.Label>Alumno*</Form.Label>
+                {PilotsList.map((pilot) => (<input key={plane.pilotName} value={plane.pilotName}>{plane.airplaneId}</input>))}
+            </Col>*/}
 
         </Row>
 
-       
         <Col>
         <Button variant="primary" type="submit">
             Guardar

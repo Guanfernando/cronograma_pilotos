@@ -77,6 +77,11 @@ const Pilot = sequelize.define('pilots', {
         allowNull: false,
         field: 'eps'
     },
+    role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'role'
+    },
     emergencyContact: {
         type: DataTypes.STRING,
         allowNull: false,

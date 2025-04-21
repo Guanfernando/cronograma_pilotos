@@ -12,6 +12,7 @@ const PilotsForm = () => {
         // Convertir formulario a objeto directamente
         const formData = Object.fromEntries(new FormData(event.target));
         
+        
         try {
             const response = await fetch('http://192.168.10.19:4000/api/pilots', {
                 method: 'POST',
@@ -23,12 +24,14 @@ const PilotsForm = () => {
                 setMessage('Piloto agregado con éxito!');
                 event.target.reset();
             } else {
-                setMessage('Error al agregar piloto, verifique todos los campos o si el registro ya existe!');
+                setMessage('Error al agregar piloto, verifique si el registro ya existe!');
             }
         } catch (error) {
             console.error('Error de conexión', error);
             setMessage('Error de conexión con el servidor');
         }
+        //datos del piloto por consola
+        console.log('Datos del piloto:', formData);
     };
 
     return (
@@ -134,6 +137,16 @@ const PilotsForm = () => {
                         <Form.Label>EPS*</Form.Label>
                         <Form.Control type="text" name="eps" placeholder="EPS" required />
                     </Col>
+
+                    <Col xs={2} md={2}>
+                        <Form.Label>Rol</Form.Label>
+                        <Form.Select name= "role" required>
+                            <option value=" ">Seleccione</option>
+                            <option value="Estudiante">Estudiante</option>
+                            <option value="Instructor">Instructor</option>
+                        </Form.Select>
+                    </Col>
+
                 </Row>
 
                 <Row className="mb-4">
@@ -173,15 +186,6 @@ const PilotsForm = () => {
                         <Form.Control type="date" name="certificateExpiration" required />
                     </Col>
 
-                    {/*<Col xs={2} md={2}>
-                        <Form.Label>Primer Apellido*</Form.Label>
-                        <Form.Control type="text" name="firstLastName" placeholder="Primer Apellido" required />
-                    </Col>
-
-                    <Col xs={2} md={2}>
-                        <Form.Label>Segundo Apellido*</Form.Label>
-                        <Form.Control type="text" name="secondLastName" placeholder="Segundo Apellido" required />
-                    </Col>*/}
                 </Row>
 
 

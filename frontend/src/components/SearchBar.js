@@ -26,11 +26,6 @@ return (
                 />
             </Form.Group>
             </Col>
-            
-            <Col className="text mt-2" sm={4}>
-        
-        
-            </Col>
             </Row>
     </Form>
     

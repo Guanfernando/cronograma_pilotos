@@ -119,6 +119,7 @@ const PilotsList = () => {
                                 <th>Rh</th>
                                 <th>Peso Kg.</th>
                                 <th>EPS</th>
+                                <th>Rol</th>
                                 <th>Contacto de Emergencia</th>
                                 <th>Teléfono de Emergencia</th>
                                 <th>Tipo Licencia</th>
@@ -141,6 +142,7 @@ const PilotsList = () => {
                                     <td>{pilot.rh}</td>
                                     <td>{pilot.weight}</td>
                                     <td>{pilot.eps}</td>
+                                    <td>{pilot.role}</td>
                                     <td>{pilot.emergencyContact}</td>
                                     <td>{pilot.emergencyNumber}</td>
                                     <td>{pilot.licenseType}</td>
