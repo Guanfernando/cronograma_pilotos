@@ -19,12 +19,12 @@ const PilotsList = () => {
 
     // Buscar automáticamente al cambiar "search"
     useEffect(() => {
-        const resultados = pilots.filter((pilot) =>
+        const results = pilots.filter((pilot) =>
             `${pilot.firstName} ${pilot.secondName || ''} ${pilot.firstLastName} ${pilot.secondLastName} ${pilot.id}`
                 .toLowerCase()
                 .includes(search.toLowerCase())
         );
-        setPilotosFiltrados(search ? resultados : pilots);
+        setPilotosFiltrados(search ? results : pilots);
     }, [search, pilots]);
 
     // Obtener datos

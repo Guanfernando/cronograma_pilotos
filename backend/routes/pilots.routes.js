@@ -1,4 +1,5 @@
 import express from "express";
+import { Op, fn, col, where } from "sequelize";
 import Pilot from "../models/Pilot.js";
 
 const pilotsRouter = express.Router();
@@ -63,5 +64,41 @@ pilotsRouter.get("/api/pilotslist", async (req, res, next) => {
         next(error);
     }
 });
+
+
+
+//ruta para obtener piloto por nombre
+
+
+pilotsRouter.get("/api/pilotsList/:name", async (req, res, next) => {
+    try {
+        const name = req.params.name.toLowerCase();
+
+        const pilots = await Pilot.findAll({
+            where: where(
+                fn("LOWER", fn("CONCAT",
+                    col("firstname"), " ",
+                    col("secondname"), " ",
+                    col("firstlastname"), " ",
+                    col("secondlastname")
+                )),
+                {
+                    [Op.like]: `%${name}%`
+                }
+            )
+        });
+
+        if (pilots.length === 0) {
+            return res.status(404).json({ message: "No se encontraron coincidencias" });
+        }
+
+        res.json(pilots);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+
 
 export default pilotsRouter;
