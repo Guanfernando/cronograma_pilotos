@@ -19,9 +19,13 @@ const SheetForm = () => {
 
         //convertir formulario a objeto directamente
         const formData = Object.fromEntries(new FormData(event.target));
+        
+        // agreagr la descripcion de la aeronave
+        formData.descriptionAirplane = descriptionAirplane;
+        
         console.log("Formulario enviado:", formData);
         try {
-            const response = await fetch ("http://192.168.10.19:4000/api/mision", {
+            const response = await fetch ("http://localhost:4000/api/mision", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
@@ -39,7 +43,7 @@ const SheetForm = () => {
     };
 
     //funcion para autocompletar el nombre del piloto
-   
+
     //funcion para traer el nombre del piloto
     useEffect(() => {
         const studentName = pilotName.trim();
@@ -50,7 +54,7 @@ const SheetForm = () => {
     
         const nameSugessted = async () => {
             try {
-                const response = await axios.get(`http://192.168.10.19:4000/api/pilotsList/${pilotName}`);
+                const response = await axios.get(`http://localhost:4000/api/pilotsList/${pilotName}`);
                 const formattedNames = response.data.map(pilot => 
                     `${pilot.firstName} ${pilot.secondName} ${pilot.firstLastName} ${pilot.secondLastName}`.trim()
                 );
@@ -78,7 +82,7 @@ const SheetForm = () => {
     useEffect(() => {
         const fetchAirplaneList = async () => {
             try {
-                const response = await axios.get("http://192.168.10.19:4000/api/airplane");
+                const response = await axios.get("http://localhost:4000/api/airplane");
                 setAirplaneList(response.data); 
             } catch (error) {
                 console.error("Datos no encontrados", error);
@@ -95,7 +99,7 @@ const SheetForm = () => {
        setAirplane(selectedAirplane);
        if (selectedAirplane) {       
             try {
-                const response = await axios.get(`http://192.168.10.19:4000/api/airplane/${selectedAirplane}`)
+                const response = await axios.get(`http://localhost:4000/api/airplane/${selectedAirplane}`)
                 setDescriptionAirplane(`${response.data.airplaneType} - ${response.data.airplaneModel}`);
             } catch (error) {
                 console.error("Error al obtener la descripción de la aeronave:", error);
@@ -125,14 +129,14 @@ const SheetForm = () => {
 
         <Col xs={2} md={2}>
             <Form.Label>Aeronave*</Form.Label>
-                <Form.Select value={airplane} onChange={handleAirplaneChange} required>
+                <Form.Select name="airplane" value={airplane} onChange={handleAirplaneChange} required>
                     <option value="">Seleccione</option>
                     {airplaneList.map((plane) => (<option key={plane.airplaneId} value={plane.airplaneId}>{plane.airplaneId}</option>))}
                 </Form.Select>
         </Col>
         <Col xs={12} md={3}>
             <Form.Label>Descripción</Form.Label>
-            <Form.Control type="text" value= {descriptionAirplane} disabled />
+            <Form.Control name="descriptionAirplane" type="text" value={descriptionAirplane} readOnly />
         </Col>
         <Col xs={12} md={2}>
             <Form.Label>Fecha*</Form.Label>
@@ -206,7 +210,7 @@ const SheetForm = () => {
                 <Form.Label>Alumno</Form.Label>
                 <Form.Control
                     type="text"
-                    name="studentName"
+                    name="studentName" 
                     value={pilotName}
                     onChange={(e) => setPilotName(e.target.value)}
                     autoComplete="off"

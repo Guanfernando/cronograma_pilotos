@@ -14,7 +14,7 @@ const PilotsForm = () => {
         
         
         try {
-            const response = await fetch('http://192.168.10.19:4000/api/pilots', {
+            const response = await fetch('http://localhost:4000/api/pilots', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
