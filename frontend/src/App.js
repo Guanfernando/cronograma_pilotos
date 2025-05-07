@@ -7,8 +7,6 @@ import PilotsList from "./components/PilotsList";
 import Admin from "./components/Admin";
 import AirplaneForm from "./components/AirplaneForm";
 import SheetForm from "./components/SheetForm";
-/*import 'react-time-picker/dist/TimePicker.css'; estilos para el reloj
-import 'react-clock/dist/Clock.css';*/
 
 
 

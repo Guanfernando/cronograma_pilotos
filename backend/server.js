@@ -10,7 +10,6 @@ import pilotsRouter from './routes/pilots.routes.js';
 import misionRouter from './routes/misions.routes.js';
 import airplanesRouter from './routes/airplanes.routes.js';
 
-
 dotenv.config();
 
 const app = express();

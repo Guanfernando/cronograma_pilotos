@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Image, Col, Row, Tooltip, OverlayTrigger } from "react-bootstrap";
 // Importa el archivo CSS
 import "../Styles.css";
+import Footer from "./Footer";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -13,11 +14,11 @@ const Dashboard = () => {
     );
 
     return (
-        <Row className="mt-3">
+        <Row className="mt-2">
             <Col className="text-center">
                 <Row>
                     <Col sm={12}>
-                        <Image width={300} src="/flying.png"/>
+                        <Image width={250} src="/flying.png"/>
                     </Col>
                 </Row>
                 <OverlayTrigger placement="top" overlay={renderTooltip('Administrador')}>
@@ -33,6 +34,8 @@ const Dashboard = () => {
                     <Image className="dashboard-icon" src='/icono_mision.png' width={100} onClick={() => navigate("/api/mision/")} />
                 </OverlayTrigger>
             </Col>
+
+            <Footer />
         </Row>
     );
 };

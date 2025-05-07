@@ -37,6 +37,7 @@ const PilotsList = () => {
             const data = await response.json();
             setPilots(data);
             setPilotosFiltrados(data);
+            console.log('✅ Pilotos obtenidos:', data);
         } catch (error) {
             console.error('❌ Error al obtener pilotos:', error);
             setError('Error al cargar los datos de los pilotos. Por favor, inténtalo de nuevo.');

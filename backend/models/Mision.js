@@ -4,16 +4,7 @@ import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../config/db.js"; 
 
 const Mision = sequelize.define("Mision", {
-   /* pilotId:{
-        type: DataTypes.INTEGER, 
-        allowNull: false,
-        references:{
-            model: "pilots",
-            key: "id"
-        },
-        field: 'pilotid'
-    },*/
-
+   
     sheetId: {
         type: DataTypes.INTEGER, 
         primaryKey: true,
@@ -21,7 +12,7 @@ const Mision = sequelize.define("Mision", {
         field: 'sheetid'
     },
     misionDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         field: 'misiondate'
     },
@@ -50,10 +41,7 @@ const Mision = sequelize.define("Mision", {
         type: DataTypes.INTEGER,
         field: 'fuelconsumption'
     },
-    /*instructor: {
-        type: DataTypes.STRING,
-        field: 'instructor'
-    },*/
+
     initialHourMeter: {
         type: DataTypes.TIME,
         field: 'initialhourmeter'
@@ -62,7 +50,7 @@ const Mision = sequelize.define("Mision", {
         type: DataTypes.TIME,
         field: 'finalhourmeter'
     },
-    TotalHourMeter: {
+    totalHourMeter: {
         type: DataTypes.TIME,
         field: 'totalhourmeter'
     },
@@ -97,7 +85,15 @@ const Mision = sequelize.define("Mision", {
     finalTsoPropeller: {
         type: DataTypes.INTEGER,
         field: 'finaltsopropeller'
-    }
+    },
+    instructorName: {
+        type: DataTypes.STRING,
+        field: 'instructorname'
+    },
+    studentName: {
+        type: DataTypes.STRING,
+        field: 'studentname'
+    },
 }, {
     tableName: "misions",
     timestamps: false 

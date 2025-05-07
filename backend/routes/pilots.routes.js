@@ -56,21 +56,23 @@ pilotsRouter.post("/api/pilots", async (req, res, next) => {
  */
 
 
-pilotsRouter.get("/api/pilotslist", async (req, res, next) => {
+//envio del nombre completo si el rol es instructor
+
+
+pilotsRouter.get("/api/pilotslist/instructor", async (req, res, next) => {
+    
+    if (req.user.role === "Instructor") {
     try {
         const pilots = await Pilot.findAll({ order: [["id", "ASC"]] });
         res.json(pilots);
+    
     } catch (error) {
         next(error);
-    }
+    }}
 });
 
-
-
-//ruta para obtener piloto por nombre
-
-
-pilotsRouter.get("/api/pilotsList/:name", async (req, res, next) => {
+//obtener pilotos por id
+/*pilotsRouter.get("/api/pilotslist/:name", async (req, res, next) => {
     try {
         const name = req.params.name.toLowerCase();
 
@@ -93,6 +95,58 @@ pilotsRouter.get("/api/pilotsList/:name", async (req, res, next) => {
         }
 
         res.json(pilots);
+    } catch (error) {
+        next(error);
+    }
+});
+*/
+
+  
+
+pilotsRouter.get("/api/pilotslist", async (req, res, next) => {
+    try {
+        const pilots = await Pilot.findAll({ order: [["id", "ASC"]] });
+        res.json(pilots);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+//ruta para obtener insructores por nombre
+pilotsRouter.get("/api/pilotslist/:name", async (req, res, next) => {
+    try {
+        const name = req.params.name.toLowerCase();
+
+        const pilots = await Pilot.findAll({
+            where:  {
+                [Op.and]: [
+                    where(
+                fn("LOWER", fn("CONCAT",
+                    col("firstname"), " ",
+                    col("secondname"), " ",
+                    col("firstlastname"), " ",
+                    col("secondlastname")
+                )),
+                {
+                    [Op.like]: `%${name}%`
+                }
+            ),
+            {role:"i"}
+            ]
+        }
+        });
+
+        if (pilots.length === 0) {
+            return res.status(404).json({ message: "No se encontraron coincidencias" });
+        }
+
+        const instructorName = pilots.map(pilot => ({
+            instructorName: `${pilot.firstname} ${pilot.secondname} ${pilot.firstlastname} ${pilot.secondlastname}`
+
+        }));
+
+        res.json(instructorName);
     } catch (error) {
         next(error);
     }

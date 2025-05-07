@@ -92,18 +92,18 @@ const PilotsForm = () => {
                     </Col>
 
                     <Col xs={12} md={2}>
-                        <Form.Label>Teléfono*</Form.Label>
+                        <Form.Label>Teléfono</Form.Label>
                         <Form.Control type="number" name="telephoneNumber" placeholder="Teléfono" required />
                     </Col>
 
                     <Col xs={12} md={2}>
-                        <Form.Label>Ciudad*</Form.Label>
-                        <Form.Control type="text" name="city" placeholder="Ciudad" required />
+                        <Form.Label>Ciudad</Form.Label>
+                        <Form.Control type="text" name="city" placeholder="Ciudad" />
                     </Col>
 
                     <Col xs={12} md={4}>
-                        <Form.Label>Dirección*</Form.Label>
-                        <Form.Control type="text" name="address" placeholder="Dirección Domicilio" required />
+                        <Form.Label>Dirección</Form.Label>
+                        <Form.Control type="text" name="address" placeholder="Dirección Domicilio" />
                     </Col>
                     </Row>
 
@@ -130,12 +130,12 @@ const PilotsForm = () => {
 
                     <Col xs={12} md={2}>
                         <Form.Label>Peso en Kg.*</Form.Label>
-                        <Form.Control type="number" name="weight" placeholder="Peso en Kg." required />
+                        <Form.Control type="number" name="weight" placeholder="Peso en Kg." />
                     </Col>
 
                     <Col xs={12} md={2}>
                         <Form.Label>EPS*</Form.Label>
-                        <Form.Control type="text" name="eps" placeholder="EPS" required />
+                        <Form.Control type="text" name="eps" placeholder="EPS" />
                     </Col>
 
                     <Col xs={2} md={2}>
@@ -152,11 +152,11 @@ const PilotsForm = () => {
                 <Row className="mb-4">
                     <Col xs={12} md={3}>
                         <Form.Label>Contacto de Emergencia</Form.Label>
-                        <Form.Control type="text" name="emergencyContact" placeholder="Nombre" required />
+                        <Form.Control type="text" name="emergencyContact" placeholder="Nombre" />
                     </Col>
                     <Col xs={12} md={2}>
                         <Form.Label>Telefono</Form.Label>
-                        <Form.Control type="number" name="emergencyNumber" placeholder="Telefono" required />
+                        <Form.Control type="number" name="emergencyNumber" placeholder="Telefono" />
                     </Col>
                 </Row>
                 <Row className="mb-3">

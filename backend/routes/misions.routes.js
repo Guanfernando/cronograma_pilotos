@@ -28,6 +28,8 @@ misionRouter.get('/api/mision', async (req, res, next) => {
     }
 
 });
+
+
 /**
  * @swagger
  * /api/mision:
@@ -61,6 +63,7 @@ misionRouter.get('/api/mision', async (req, res, next) => {
  *         description: Error en el servidor
  */
 misionRouter.post('/api/mision', async (req,res, next) => {
+    console.log("Datos recibidos de Frontend:", req.body)
     try {
         const newSheet = await Mision.create(req.body);
         if (!req.body.sheetId) {
